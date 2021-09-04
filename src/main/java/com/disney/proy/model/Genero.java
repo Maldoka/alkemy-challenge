@@ -16,33 +16,26 @@ import javax.persistence.Table;
 public class Genero {
 	@Column
 	private String nombre;
-	@Column(name="id_genero")
+
+	@Column(name = "id_genero")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idGenero;
+	private Integer id_genero;
+
 	@Column
 	private String imagen;
-	@Column(name="pelicula_serie")
-	private int peliculaSerie;
-	
-	   @ManyToMany(mappedBy = "generos")
-	    private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
 
+	@ManyToMany(mappedBy = "generos")
+	private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
 
-	public Genero(String nombre, Integer idGenero, String imagen, int peliculaSerie,
-			Set<PeliculaSerie> peliculasSeries) {
+	public Genero(String nombre, String imagen) {
 		super();
 		this.nombre = nombre;
-		this.idGenero = idGenero;
 		this.imagen = imagen;
-		this.peliculaSerie = peliculaSerie;
-		this.peliculasSeries = peliculasSeries;
 	}
 
-	public Genero() {
-
-	}
-
+	public Genero() {}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -51,13 +44,12 @@ public class Genero {
 		this.nombre = nombre;
 	}
 
-
 	public Integer getIdGenero() {
-		return idGenero;
+		return id_genero;
 	}
 
 	public void setIdGenero(Integer idGenero) {
-		this.idGenero = idGenero;
+		this.id_genero = idGenero;
 	}
 
 	public String getImagen() {
@@ -68,13 +60,12 @@ public class Genero {
 		this.imagen = imagen;
 	}
 
-	public int getPeliculaSerie() {
-		return peliculaSerie;
-	}
-
-	public void setPeliculaSerie(int peliculaSerie) {
-		this.peliculaSerie = peliculaSerie;
-	}
-
+//	public int getPeliculaSerie() {
+//		return peliculaSerie;
+//	}
+//
+//	public void setPeliculaSerie(int peliculaSerie) {
+//		this.peliculaSerie = peliculaSerie;
+//	}
 
 }

@@ -1,6 +1,7 @@
 package com.disney.proy.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,67 +13,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import antlr.collections.List;
 
 @Entity
-@Table (name="pelicula_serie")
+@Table(name = "pelicula_serie")
 public class PeliculaSerie {
-	@Column
 	private String imagen;
-	@Column(name="id_pelicula_serie")
-	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer idPeliculaSerie;
-	@Column
 	private String titulo;
-	@Column(name="fecha_creacion")
 	private Date fechaCreacion;
-	@Column
 	private int calificacion;
-	@Column(name="personajes_asociados")
-	private int personajesAsociados;
+
+	private Set<Personaje> personajes;
+	private Set<Genero> generos;
 
 	
-	 @ManyToMany(cascade = CascadeType.ALL)
-	    @JoinTable(name = "peliculaSerie_personaje",
-	        joinColumns = @JoinColumn(name = "peliculaSerie_id", referencedColumnName = "id_pelicula_serie"),
-	        inverseJoinColumns = @JoinColumn(name = "personaje_id", referencedColumnName = "id_Personaje"))
-	    private Set<Personaje> personajes;
-	
-	 @ManyToMany(cascade = CascadeType.ALL)
-	    @JoinTable(name = "peliculaSerie_genero",
-	        joinColumns = @JoinColumn(name = "peliculaSerie_id", referencedColumnName = "id_pelicula_serie"),
-	        inverseJoinColumns = @JoinColumn(name = "idGenero", referencedColumnName = "id_genero"))
-	    private Set<Genero> generos;
-	
-	
-
-	public PeliculaSerie(String imagen, Integer idPeliculaSerie, String titulo, Date fechaCreacion, int calificacion,
-			int personajesAsociados, Set<Personaje> personajes, Set<Genero> generos) {
+	public PeliculaSerie(String imagen, String titulo, Date fechaCreacion, int calificacion) {
 		super();
 		this.imagen = imagen;
-		this.idPeliculaSerie = idPeliculaSerie;
 		this.titulo = titulo;
 		this.fechaCreacion = fechaCreacion;
 		this.calificacion = calificacion;
-		this.personajesAsociados = personajesAsociados;
-		this.personajes = personajes;
-		this.generos = generos;
+		this.generos = new HashSet<Genero>();
+		this.personajes = new HashSet<Personaje>();
 	}
-	public PeliculaSerie() {
 
-	}
+	@Column
 	public int getCalificacion() {
-		return calificacion;	
+		return calificacion;
 	}
 
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
 
+	@Column
 	public String getImagen() {
 		return imagen;
 	}
@@ -81,13 +57,18 @@ public class PeliculaSerie {
 		this.imagen = imagen;
 	}
 
-
+	@Column(name = "id_pelicula_serie")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getIdPeliculaSerie() {
 		return idPeliculaSerie;
 	}
+
 	public void setIdPeliculaSerie(Integer idPeliculaSerie) {
 		this.idPeliculaSerie = idPeliculaSerie;
 	}
+
+	@Column
 	public String getTitulo() {
 		return titulo;
 	}
@@ -96,6 +77,7 @@ public class PeliculaSerie {
 		this.titulo = titulo;
 	}
 
+	@Column(name = "fecha_creacion")
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
@@ -104,13 +86,23 @@ public class PeliculaSerie {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public int getPersonajesAsociados() {
-		return personajesAsociados;
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "peliculaserie_personaje", joinColumns = @JoinColumn(name = "id_pelicula_serie"), inverseJoinColumns = @JoinColumn(name = "id_personaje"))
+	public Set<Personaje> getPersonajes() {
+		return personajes;
 	}
 
-	public void setPersonajesAsociados(int personajesAsociados) {
-		this.personajesAsociados = personajesAsociados;
+	public void setPersonajes(Set<Personaje> personajes) {
+		this.personajes = personajes;
 	}
 
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "peliculaserie_genero", joinColumns = @JoinColumn(name = "id_pelicula_serie"), inverseJoinColumns = @JoinColumn(name = "id_genero"))
+	public Set<Genero> getGeneros() {
+		return generos;
+	}
 
+	public void setGeneros(Set<Genero> generos) {
+		this.generos = generos;
+	}
 }
