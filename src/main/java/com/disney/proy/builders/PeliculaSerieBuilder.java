@@ -3,9 +3,7 @@ package com.disney.proy.builders;
 import java.util.Date;
 
 import com.disney.proy.dto.PeliculaSerieDto;
-import com.disney.proy.model.Genero;
 import com.disney.proy.model.PeliculaSerie;
-import com.disney.proy.model.Personaje;
 
 public class PeliculaSerieBuilder {
 	private String imagen;

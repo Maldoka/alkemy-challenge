@@ -1,21 +1,17 @@
 package com.disney.proy.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import java.util.List;
 
 @Entity
 @Table(name = "personajes")
@@ -41,6 +37,9 @@ public class Personaje {
 
 	@ManyToMany(mappedBy = "personajes")
 	private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
+	
+	
+
 
 	public Personaje(String nombre, String imagen, int edad, float peso, String historia) {
 		super();
@@ -101,4 +100,5 @@ public class Personaje {
 	public void setHistoria(String historia) {
 		this.historia = historia;
 	}
+
 }

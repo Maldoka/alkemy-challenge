@@ -29,6 +29,10 @@ public class PeliculaSerie {
 	private Set<Genero> generos;
 
 	
+	public PeliculaSerie() {
+		
+	}
+
 	public PeliculaSerie(String imagen, String titulo, Date fechaCreacion, int calificacion) {
 		super();
 		this.imagen = imagen;

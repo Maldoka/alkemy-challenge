@@ -20,6 +20,8 @@ public class PersonajeBuilder {
 		return this;
 	}
 	
+
+	
 	public Personaje build() {
 		return new Personaje(this.nombre, this.imagen,this.edad,this.peso,this.historia);
 	}
