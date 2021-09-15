@@ -32,8 +32,12 @@ public class PeliculaSerieController {
 
 	@PostMapping
 	public ResponseEntity<?> savePeliculaSerie(@RequestBody PeliculaSerieDto peliculaSerieDto) {
-		PeliculaSerie peliculaSerie = peliculaSerieService.save(peliculaSerieDto);
-		return new ResponseEntity<>(peliculaSerie, HttpStatus.ACCEPTED);
+		if (peliculaSerieDto.getCalificacion() >= 1 && peliculaSerieDto.getCalificacion() <= 5) {
+			PeliculaSerie peliculaSerie = peliculaSerieService.save(peliculaSerieDto);
+			return new ResponseEntity<>(peliculaSerie, HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity<>("La calificacion debe estar entre uno y cinco", HttpStatus.BAD_REQUEST);
+		
 	}
 
 	@GetMapping("/{id}")

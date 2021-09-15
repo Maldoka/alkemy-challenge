@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name = "personajes")
@@ -34,7 +36,8 @@ public class Personaje {
 	
 	@Column()
 	private String historia;
-
+	
+	@JsonIgnoreProperties("personajes") // Es para evitar un loop infinito
 	@ManyToMany(mappedBy = "personajes")
 	private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
 	
@@ -99,6 +102,10 @@ public class Personaje {
 
 	public void setHistoria(String historia) {
 		this.historia = historia;
+	}
+	
+	public Set<PeliculaSerie> getPeliculasSeries() {
+		return this.peliculasSeries;
 	}
 
 }

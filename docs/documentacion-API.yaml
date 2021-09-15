@@ -1,0 +1,467 @@
+swagger: "2.0"
+info:
+  description: "Documentación para la explicación de Disney"
+  version: "1.0.0"
+  title: "Backend DISNEY"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "maldonado.karen32@hotmail.com"
+basePath: "/"
+
+tags:
+- name: "characters"
+  description: "Operaciones con la entidad Personaje"
+- name: "movies"
+  description: "Operaciones con la entidad PeliculaSerie"
+- name: "genero"
+  description: "Operaciones con la entidad Género"
+- name: "usuario"
+  description: "Operaciones con la entidad Usuario"
+  
+schemes:
+- "http"
+paths:
+  /characters:
+    post:
+      tags:
+      - "characters"
+      summary: "Crear un nuevo personaje"
+      description: "Genera un nuevo personaje en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto Personaje a añadirse a la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/Personaje"
+      responses:
+        "201":
+          description: "Personaje creado"
+    get:
+      tags:
+      - "characters"
+      summary: "Lista todos los personajes"
+      description: "Lista todos los personajes existentes en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "name"
+        type: "string"
+        required: false
+      - in: "query"
+        name: "age"
+        type: "integer"
+        required: false
+      - in: "query"
+        name: "movies"
+        type: "integer"
+        required: false
+      responses:
+        "200":
+          description: "Lista de Personajes generada"
+          
+  /characters/{id}:
+    get:
+      tags:
+      - "characters"
+      summary: "Obtiene la información completa de un personaje"
+      description: "Obtiene la información completa de un personaje existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del Personaje que se quiere recuperar"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Personaje recuperado"
+    put:
+      tags:
+      - "characters"
+      summary: "Actualizar un personaje existente"
+      description: "Actualiza un personaje existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del Personaje que se quiere actualizar"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Datos para actualizar el Personaje en la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/Personaje"
+      responses:
+        "200":
+          description: "Personaje actualizado"
+
+    delete:
+      tags:
+      - "characters"
+      summary: "Eliminar un personaje"
+      description: "Elimina un personaje existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del Personaje que se quiere eliminar"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "Personaje eliminado"
+          
+  /movies:
+    post:
+      tags:
+      - "movies"
+      summary: "Crear una nueva pelicula o serie"
+      description: "Crear una nueva pelicula o serie en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto PeliculaSerie a añadirse a la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/PeliculaSerie"
+      responses:
+        "201":
+          description: "PeliculaSerie creado"
+    get:
+      tags:
+      - "movies"
+      summary: "Lista todas las peliculas_series"
+      description: "Lista todas las peliculas_series existentes en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "name"
+        type: "string"
+        required: false
+      - in: "query"
+        name: "genre"
+        type: "integer"
+        required: false   
+      - in: "query"
+        name: "order"
+        type: "string"
+        required: false
+      responses:
+        "200":
+          description: "Lista de Pelicula_serie generada"
+          
+  /movies/{id}:
+    get:
+      tags:
+      - "movies"
+      summary: "Obtiene la información completa de una pelicula o serie"
+      description: "Obtiene la información completa de una pelicula o serie existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID de la pelicula_serie que se quiere recuperar"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Pelicula_serie recuperado"
+    put:
+      tags:
+      - "movies"
+      summary: "Actualizar una pelicula o serie existente"
+      description: "Actualiza una pelicula o serie existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID de la pelicula o serie que se quiere actualizar"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Datos para actualizar la pelicula o serie en la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/PeliculaSerie"
+      responses:
+        "200":
+          description: "Pelicula_serie actualizada"
+
+    delete:
+      tags:
+      - "movies"
+      summary: "Eliminar una pelicula o serie"
+      description: "Elimina una pelicula o serie existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID de la pelicula o serie que se quiere eliminar"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "Pelicula_serie eliminada"
+  
+  /genero:
+    post:
+      tags:
+      - "genero"
+      summary: "Crear un nuevo genero"
+      description: "crea un nuevo genero en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto genero a añadirse a la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/Genero"
+      responses:
+        "201":
+          description: "Genero creado"
+    get:
+      tags:
+      - "genero"
+      summary: "Lista todos los generos"
+      description: "Lista todos los generos existentes en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Lista de generos generados"
+          
+  /genero/{id}:
+    get:
+      tags:
+      - "genero"
+      summary: "Obtiene la información completa de un genero"
+      description: "Obtiene la información completa de un genero existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del genero que se quiere recuperar"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Genero recuperado"
+    put:
+      tags:
+      - "genero"
+      summary: "Actualizar un genero existente"
+      description: "Actualiza un genero existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del Genero que se quiere actualizar"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Datos para actualizar el genero en la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/Genero"
+      responses:
+        "200":
+          description: "Genero actualizado"
+
+    delete:
+      tags:
+      - "genero"
+      summary: "Eliminar un genero"
+      description: "Elimina un genero existente en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "El ID del genero que se quiere eliminar"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "Genero eliminado"
+  
+  /auth/login:
+    post:
+      tags:
+      - "usuario"
+      summary: "Iniciar sesion"
+      description: "Inicia Sesion con un usuario registrado"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Usuario y contraseña para iniciar la sesion"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+      responses:
+        "201":
+          description: "Usuario creado"
+  /auth/register:
+    post:
+      tags:
+      - "usuario"
+      summary: "Crear un nuevo usuario"
+      description: "Genera un nuevo usuario en la base de datos"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto usuario a añadirse a la base de datos"
+        required: true
+        schema:
+          $ref: "#/definitions/Usuario"
+      responses:
+        "201":
+          description: "Usuario creado"
+ 
+
+
+
+definitions: 
+  Personaje:
+    type: "object"
+    properties:
+      idPersonaje:
+        type: "integer"
+        format: "int32"
+      nombre:
+        type: "string"
+      imagen:
+        type: "string"
+      edad:
+        type: "integer"
+        format: "int32"
+      peso:
+        type: "number"
+      historia:
+        type: "string"
+  Genero:
+    type: "object"
+    properties:
+      idGenero:
+        type: "integer"
+        format: "int32"
+      nombre:
+        type: "string"
+      imagen:
+        type: "string"
+  PeliculaSerie:
+    type: "object"
+    properties:
+      idPeliculaSerie:
+        type: "integer"
+        format: "int32"
+      imagen:
+        type: "string"
+      titulo:
+        type: "string"
+      fechaCreacion:
+        type: "string"
+        format: "date"
+      clasificacion:
+        type: "integer"
+        format: "int32"
+  Usuario:
+    type: "object"
+    properties:
+      idUsuario:
+        type: "integer"
+        format: "int32"
+      username:
+        type: "string"
+      clave:
+        type: "string"
+      correo:
+        type: "string"
+      nombre:
+        type: "string"
+      apelido:
+        type: "string"
+
+
+
+  
