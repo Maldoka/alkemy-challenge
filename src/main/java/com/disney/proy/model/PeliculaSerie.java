@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name = "pelicula_serie")
@@ -90,6 +92,7 @@ public class PeliculaSerie {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	@JsonIgnoreProperties("peliculasSeries")
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "peliculaserie_personaje", joinColumns = @JoinColumn(name = "id_pelicula_serie"), inverseJoinColumns = @JoinColumn(name = "id_personaje"))
 	public Set<Personaje> getPersonajes() {

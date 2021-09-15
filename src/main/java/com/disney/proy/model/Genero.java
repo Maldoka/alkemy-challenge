@@ -60,12 +60,5 @@ public class Genero {
 		this.imagen = imagen;
 	}
 
-//	public int getPeliculaSerie() {
-//		return peliculaSerie;
-//	}
-//
-//	public void setPeliculaSerie(int peliculaSerie) {
-//		this.peliculaSerie = peliculaSerie;
-//	}
 
 }
